@@ -1,24 +1,66 @@
-# README
+# Community list
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+twitterのリストをみんなで作成できるサービスです。
+twitter apiを利用して、このウェブアプリ上で作成したリストをtwitter上のリストに自動で反映します。
 
-Things you may want to cover:
+# 構成
+![IMG_20200727_135928](https://user-images.githubusercontent.com/29334692/88580428-8b54b180-d086-11ea-817d-375a1d284322.jpg)
+![IMG_20200727_140059](https://user-images.githubusercontent.com/29334692/88580447-90b1fc00-d086-11ea-9681-cfa59490d323.jpg)
 
-* Ruby version
+# 構築方法
 
-* System dependencies
+docker-composeのインストール方法
 
-* Configuration
+docker-composeでdbとwebのサービスをビルド
+```
+docker-compose build
+```
 
-* Database creation
+db作成
+```
+docker-compose run web rake db:create
+```
 
-* Database initialization
+docker-composeでdbとwebのサービスを起動
+```
+docker-compose up
+```
 
-* How to run the test suite
+TODO: 以下必要か最終確認
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+このままだと、画面を表示した際にエラーが出てしまう。
+新しいターミナルを開いて、dockerで起動している web に接続し、webpackerをインストールする。
+```
+docker exec -it community-list_web_1 /bin/bash
+rails webpacker:install 
+```
 
-* ...
+
+
+以下のように上書きするか聞かれたらEnterを押して上書き。
+```
+Overwrite /myapp/config/webpacker.yml? (enter "h" for help) [Ynaqdhm] 
+```
+
+dbマイグレート
+```
+rails db:migrate
+```
+※すでにfirebaseに登録されているtwitterアカウントを使用した際に、rails側のdbにアカウントのデータが保存されていなかった場合エラーが発生します。 そうなってしまった場合、firebase側で登録情報を破棄するか、新しいfirebaseのプロジェクトを用意して、config等を書き換える必要があります。
+
+# DB内確認方法
+
+docker-composeでdbとwebのサービスを起動
+```
+docker-compose up
+```
+
+新しいターミナルを開いて、dockerで起動している web に接続し、そこからdbコンソールを開く。
+```
+docker exec -it community-list_web_1 /bin/bash
+rails dbconsole
+```
+
+passwordを聞かれたら、「password」と入力
+
