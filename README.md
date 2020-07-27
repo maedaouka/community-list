@@ -26,6 +26,9 @@ docker-composeでdbとwebのサービスを起動
 docker-compose up
 ```
 
+TODO: 以下必要か最終確認
+
+
 このままだと、画面を表示した際にエラーが出てしまう。
 新しいターミナルを開いて、dockerで起動している web に接続し、webpackerをインストールする。
 ```
