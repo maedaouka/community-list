@@ -32,7 +32,7 @@ TODO: 以下必要か最終確認
 このままだと、画面を表示した際にエラーが出てしまう。
 新しいターミナルを開いて、dockerで起動している web に接続し、webpackerをインストールする。
 ```
-docker exec -it online-giziroku_web_1 /bin/bash
+docker exec -it community-list_web_1 /bin/bash
 rails webpacker:install 
 ```
 
@@ -58,7 +58,7 @@ docker-compose up
 
 新しいターミナルを開いて、dockerで起動している web に接続し、そこからdbコンソールを開く。
 ```
-docker exec -it online-giziroku_web_1 /bin/bash
+docker exec -it community-list_web_1 /bin/bash
 rails dbconsole
 ```
 
