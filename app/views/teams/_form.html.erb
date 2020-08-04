@@ -1,10 +1,10 @@
-<%= form_with(model: group, local: true) do |form| %>
-  <% if group.errors.any? %>
+<%= form_with(model: team, local: true) do |form| %>
+  <% if team.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
 
       <ul>
-        <% group.errors.full_messages.each do |message| %>
+        <% team.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -14,6 +14,11 @@
   <div class="field">
     <%= form.label :uid %>
     <%= form.text_field :uid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
