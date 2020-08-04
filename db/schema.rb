@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_03_170406) do
+ActiveRecord::Schema.define(version: 2020_08_04_015634) do
 
-  create_table "group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "team_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_group_users_on_group_id"
-    t.index ["user_id"], name: "index_group_users_on_user_id"
+    t.index ["group_id"], name: "index_team_users_on_group_id"
+    t.index ["user_id"], name: "index_team_users_on_user_id"
   end
 
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -36,6 +36,6 @@ ActiveRecord::Schema.define(version: 2020_08_03_170406) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "group_users", "teams", column: "group_id"
-  add_foreign_key "group_users", "users"
+  add_foreign_key "team_users", "teams", column: "group_id"
+  add_foreign_key "team_users", "users"
 end
