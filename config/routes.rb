@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
   resources :team_users
   resources :teams, param: :uid
   resources :users
