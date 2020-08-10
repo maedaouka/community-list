@@ -10,23 +10,25 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :uid %>
-    <%= form.text_field :uid %>
+  
+  <div class="field modal-body">
+    <%= form.label "グループID" %>
+    <%= form.text_field :uid, class: "form-control", placeholder: "グループIDを入力" %>
   </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="field modal-body">
+    <%= form.label "グループ名" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "グループ名を入力" %>
   </div>
 
-  <div class="field">
-    <%= form.label :explanation %>
-    <%= form.text_field :explanation %>
+  <div class="field modal-body">
+    <%= form.label "説明文" %>
+    <%= form.text_field :explanation, class: "form-control", placeholder: "グループの説明を入力" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+
+  <div class="actions modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+    <%= form.submit "決定", class: "btn btn-info" %>
   </div>
 <% end %>
