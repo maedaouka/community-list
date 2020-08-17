@@ -4,7 +4,7 @@ class FirebaseController < ApplicationController
   # GET /login
   def new
     if logged_in?
-      redirect_to users_path
+      redirect_to teams_path
     end
   end
 
@@ -13,7 +13,7 @@ class FirebaseController < ApplicationController
       user = yield(decoded_token)
       log_in(user)
       flash[:success] = 'ログインしました。'
-      redirect_back_or(users_path)
+      redirect_back_or(teams_path)
     else
       flash[:danger] = 'ログインできませんでした。'
       redirect_to login_url
