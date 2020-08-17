@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_04_015634) do
+ActiveRecord::Schema.define(version: 2020_08_17_060559) do
 
   create_table "team_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_admin"
+    t.string "is_inviting"
     t.index ["group_id"], name: "index_team_users_on_group_id"
     t.index ["user_id"], name: "index_team_users_on_user_id"
   end
@@ -34,6 +36,9 @@ ActiveRecord::Schema.define(version: 2020_08_04_015634) do
     t.string "twitter_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "screen_name"
+    t.string "image_url"
   end
 
   add_foreign_key "team_users", "teams", column: "group_id"
