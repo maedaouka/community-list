@@ -8,8 +8,6 @@ class AccountsController < FirebaseController
       puts account_params
       User.create(
         uid: decoded_token['uid'],
-        # name: decoded_token['displayName']
-        # screen_name: decoded_token['decoded_token'][:payload]['displayName']
         twitter_user_id: decoded_token['decoded_token'][:payload]['user_id'],
         name: decoded_token['decoded_token'][:payload]['name'],
         image_url: decoded_token['decoded_token'][:payload]['picture'],
