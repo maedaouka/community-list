@@ -58,7 +58,7 @@
           signInSuccessWithAuthResult: (authResult, redirectUrl) => {
             console.log(authResult)
             authResult.user.getIdToken(true)
-            .then((idToken) => { railsLogin(authResult.additionalUserInfo.isNewUser, idToken) })
+            .then((idToken) => { railsLogin(authResult.additionalUserInfo.isNewUser, idToken, authResult.additionalUserInfo) })
             .catch((error)  => { console.log(`Firebase getIdToken failed!: ${error.message}`) });
             return false; // firebase側にログイン後はリダイレクトせず、railsへajaxでリクエストを送る
           },
@@ -81,12 +81,19 @@
       return { "Authorization": `Bearer ${idToken}` };
     }
       
-    const railsLogin = (isNewUser, idToken) => {
+    const railsLogin = (isNewUser, idToken, userInfo) => {
       console.log("rails login")
+      console.log(idToken)
+
+      console.log("Twitter　ユーザーinfo")
+      console.log(userInfo.username)
       const url = isNewUser ? "/accounts" : "/login";
       const headers = Object.assign(csrfTokenObj(), authorizationObj(idToken));
-      $.ajax({url: url, type: "POST", headers: headers})
-        .done((data) => { console.log("Rails login!")      })
+      $.ajax({url: url, type: "POST", headers: headers, data: {
+        twitter_user: {
+          screen_name: userInfo.username
+        }}
+      }).done((data) => { console.log("Rails login!")      })
         .fail((data) => { console.log("Rails login failed!") });
     }
 
