@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  # GET /users/mypage or root
+  def mypage
+    @user = current_user
+    @teams = Team.all
+
+  end
+
   # GET /users
   # GET /users.json
   def index
