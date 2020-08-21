@@ -4,7 +4,8 @@
     <div class="col-sm-5 d-flex align-items-center justify-content-end px-0">
       <div class="px-0">
         <img style="width:30px" src=<%= @user.image_url %> class="rounded-circle pb-1">
-        <%= @user.name %>
+        <%= @user.name%>
+        @<%= @user.screen_name%>
         <%= link_to 'ログアウト',"/", onclick: 'firebaseLogout();return false;', class: 'btn btn-secondary ml-5' %>
       </div>
     </div>
@@ -12,29 +13,34 @@
 </div>
 <br>
 
-<div class="container">
-  <div class="row">
-    <h1><%= @team.name %></h1>
-  </div>
-  <div class="row">
-    <p class="text-secondary"><%= @team.explanation %></p>
-  </div>
-  <br>
-  <div class="row py-3 d-flex align-items-center justify-content-end">
-    <button type="button" class="btn btn-outline-info mr-4 px-4 py-2" data-toggle="modal" data-target="#post">メンバーの追加</button>
-    <button type="button" class="btn btn-outline-info px-4 py-2" data-toggle="modal" data-target="#post">グループ情報の編集</button>
-  </div>
-
-  <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div id="room-name-modal">
-          <%= render 'form', team: @team %>
-        </div>
+<div class="modal fade" id="add-member" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div id="room-name-modal">
+        <%= render 'add_member_form', user: @new_user %>
       </div>
     </div>
   </div>
+</div>
 
+<div class="modal fade" id="edit-team" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div id="room-name-modal">
+        <%= render 'edit_team_form', team: @team %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card p-5 mx-auto" style="width:97%">
+<h1 class="mx-5 mt-3"><%= @team.name %></h1>
+<p class="text-secondary mx-5 px-1"><%= @team.explanation %></p>
+
+<div class="row py-3 pr-1 d-flex align-items-center justify-content-end">
+  <button type="button" class="btn btn-outline-info mr-4 px-4 py-2" data-toggle="modal" data-target="#add-member">メンバーの追加</button>
+  <button type="button" class="btn btn-outline-info px-4 py-2" data-toggle="modal" data-target="#edit-team">グループ情報の編集</button>
+</div>
   <div class="row">
     <% @members.each do |member| %>
       <div class="col-6 col-sm-4 col-md-3 col-lg-2">
@@ -156,6 +162,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 

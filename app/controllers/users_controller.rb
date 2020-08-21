@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   # GET /users/mypage or root
   def mypage
     @user = current_user
+    if current_user.nil?
+      redirect_to login_path
+    end
     @teams = Team.all
+    @team = Team.new
 
   end
 
@@ -30,7 +34,11 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
+  # teamのページから招待の追加でくる。
   def create
+    puts user_params
+    exist_user =　User.where(screen_name: user_params.screen_name)[0]
+
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -76,6 +84,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:uid, :twitter_user_id)
+      params.require(:user).permit(:uid, :twitter_user_id, :screen_name)
     end
 end
