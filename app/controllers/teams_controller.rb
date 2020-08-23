@@ -28,19 +28,29 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
+    @team_user = TeamUser.new
+    @team_user.team = @team
+    @team_user.user = current_user
+
     puts(team_params)
 
+    # twitterのリストを作成する
     @twitter = Twitter::REST::Client.new do |config|
       config.consumer_key        = "vYlAgrKfsaF1pEH7U9oK76b1S"
       config.consumer_secret     = "bLo0FNYpfaY9VCWZpai3E1iSfNeKnKSXKYeo1CdKGA9KK7HveJ"
       config.access_token        = "1097694819239964673-UeejF5wc18yX4cZCqnhvlkLxWDGStb"
       config.access_token_secret = "cbvG5QWkj64ClIcEksh9WzCsddJc3DlSaDLuQkEUSzX9h"
     end
-
     @twitter.create_list(@team.name, option = {description: @team.explanation})
+
+    is_succeeded_transaction = false
+    ActiveRecord::Base.transaction do
+      is_succeeded_transaction = @team.save && @team_user.save
+    end
+
     respond_to do |format|
-      if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+      if is_succeeded_transaction
+        format.html { redirect_to @team, notice: 'Team and Team user was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
