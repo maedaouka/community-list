@@ -13,6 +13,7 @@ class TeamsController < ApplicationController
     @user = current_user
     @new_user = User.new
     @members = User.all
+    # @TeamMembers = TeamUsers.where(user_id: current_user.id, room_id: @room_id)
   end
 
   # GET /teams/new
