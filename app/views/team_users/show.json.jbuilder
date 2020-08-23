@@ -1,1 +1,1 @@
-json.partial! "group_users/group_user", group_user: @group_user
+json.partial! "team_users/team_user", team_user: @team_user

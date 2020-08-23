@@ -1,1 +1,1 @@
-json.array! @group_users, partial: "group_users/group_user", as: :group_user
+json.array! @team_users, partial: "team_users/team_user", as: :team_user

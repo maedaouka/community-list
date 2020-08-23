@@ -1,2 +1,2 @@
-json.extract! group_user, :id, :user_id, :group_id, :created_at, :updated_at
-json.url group_user_url(group_user, format: :json)
+json.extract! team_user, :id, :user_id, :team_id, :created_at, :updated_at
+json.url team_user_url(team_user, format: :json)
