@@ -35,7 +35,7 @@
     <div class="row py-3 pr-1 d-flex align-items-center justify-content-end">
       <button type="button" class="btn btn-outline-info px-4 py-2" data-toggle="modal" data-target="#edit-team">新しいグループの作成</button>
     </div>
-    <% @teams.each do |team| %>
+      <% @teams.each do |team| %>
       <%= link_to team.name,"/teams/"+team.uid, class: 'btn btn-outline-info py-3 mb-2 mx-auto', :style=>"width:70%; font-size:x-large;" %>
     <% end %>
   </div>

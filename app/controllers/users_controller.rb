@@ -36,20 +36,33 @@ class UsersController < ApplicationController
   # POST /users.json
   # teamのページから招待の追加でくる。
   def create
+    puts "user params"
     puts user_params
-    exist_user =　User.where(screen_name: user_params.screen_name)[0]
 
-    @user = User.new(user_params)
+    @team = Team.find(user_params["team_id"])
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    invited_user_screen_name = user_params["screen_name"].delete("@")
+
+    puts "twitter id"
+    puts invited_user_screen_name
+
+    # 追加されたのがまだサービス上に登録されてないユーザーの場合、今は何もしない。
+    exist_user = User.find_by(screen_name: invited_user_screen_name)
+    if exist_user.nil?
+      puts "現在登録されていないユーザーに対するチーム招待"
+      respond_to do |format|
+        format.html { redirect_to @team, notice: '現在登録されていないユーザーに対するチーム招待' }
     end
+    else
+      @team_user = TeamUser.new
+      @team_user.team = Team.find(user_params["team_id"])
+      @team_user.user = current_user
+      @team_user.save
+      respond_to do |format|
+        format.html { redirect_to @team, notice: '現在登録されていないユーザーに対するチーム招待' }
+    end
+
+    # @user = User.new(user_params)
   end
 
   # PATCH/PUT /users/1
@@ -84,6 +97,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:uid, :twitter_user_id, :screen_name)
+      # params.require(:user).permit(:uid, :twitter_user_id, :screen_name)
+      params.permit(:screen_name, :team_id)
     end
 end
