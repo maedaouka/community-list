@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_twitter_client, only: [:create]
 
   # GET /teams
   # GET /teams.json
@@ -36,14 +37,10 @@ class TeamsController < ApplicationController
     puts(team_params)
 
     # twitterのリストを作成する
-    @twitter = Twitter::REST::Client.new do |config|
-      config.consumer_key        = "vYlAgrKfsaF1pEH7U9oK76b1S"
-      config.consumer_secret     = "bLo0FNYpfaY9VCWZpai3E1iSfNeKnKSXKYeo1CdKGA9KK7HveJ"
-      config.access_token        = "1097694819239964673-UeejF5wc18yX4cZCqnhvlkLxWDGStb"
-      config.access_token_secret = "cbvG5QWkj64ClIcEksh9WzCsddJc3DlSaDLuQkEUSzX9h"
-    end
-    @twitter.create_list(@team.name, option = {description: @team.explanation})
-
+    puts "ツイッターのリストを作成"
+    twitter_res = @twitter.create_list(@team.name, option = {description: @team.explanation})
+    puts twitter_res.id
+    puts twitter_res.url
     is_succeeded_transaction = false
     ActiveRecord::Base.transaction do
       is_succeeded_transaction = @team.save && @team_user.save

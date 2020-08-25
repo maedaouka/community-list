@@ -52,7 +52,7 @@ class UsersController < ApplicationController
       puts "現在登録されていないユーザーに対するチーム招待"
       respond_to do |format|
         format.html { redirect_to @team, notice: '現在登録されていないユーザーに対するチーム招待' }
-    end
+      end
     else
       @team_user = TeamUser.new
       @team_user.team = Team.find(user_params["team_id"])
@@ -60,8 +60,8 @@ class UsersController < ApplicationController
       @team_user.save
       respond_to do |format|
         format.html { redirect_to @team, notice: '現在登録されていないユーザーに対するチーム招待' }
+      end
     end
-
     # @user = User.new(user_params)
   end
 
