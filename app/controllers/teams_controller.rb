@@ -41,6 +41,10 @@ class TeamsController < ApplicationController
     twitter_res = @twitter.create_list(@team.name, option = {description: @team.explanation})
     puts twitter_res.id
     puts twitter_res.url
+
+    @team.twitter_list_id = twitter_res.id
+    @team.twitter_list_uri = twitter_res.uri
+
     is_succeeded_transaction = false
     ActiveRecord::Base.transaction do
       is_succeeded_transaction = @team.save && @team_user.save

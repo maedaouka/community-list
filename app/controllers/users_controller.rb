@@ -58,8 +58,9 @@ class UsersController < ApplicationController
       @team_user.team = Team.find(user_params["team_id"])
       @team_user.user = current_user
       @team_user.save
+      
       respond_to do |format|
-        format.html { redirect_to @team, notice: '現在登録されていないユーザーに対するチーム招待' }
+        format.html { redirect_to @team, notice: '登録' }
       end
     end
     # @user = User.new(user_params)
