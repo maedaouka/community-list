@@ -39,6 +39,8 @@ class TeamsController < ApplicationController
     # twitterのリストを作成する
     puts "ツイッターのリストを作成"
     twitter_res = @twitter.create_list(@team.name, option = {description: @team.explanation})
+    puts @twitter.add_list_member(twitter_res.uri, current_user.screen_name)
+    
     puts twitter_res.id
     puts twitter_res.url
 

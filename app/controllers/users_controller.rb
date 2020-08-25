@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     if current_user.nil?
       redirect_to login_path
     end
+    @team_users = TeamUser.where(user_id: current_user.id)
     @teams = Team.all
     @team = Team.new
 
@@ -57,7 +58,7 @@ class UsersController < ApplicationController
     else
       @team_user = TeamUser.new
       @team_user.team = Team.find(user_params["team_id"])
-      @team_user.user = current_user
+      @team_user.user = exist_user
       @team_user.save
 
       @twitter.add_list_member(@team.twitter_list_uri, invited_user_screen_name)
