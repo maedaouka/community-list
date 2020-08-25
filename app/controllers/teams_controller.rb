@@ -99,10 +99,14 @@ class TeamsController < ApplicationController
 
     def set_twitter_client
       @twitter = Twitter::REST::Client.new do |config|
-        config.consumer_key        = "vYlAgrKfsaF1pEH7U9oK76b1S"
-        config.consumer_secret     = "bLo0FNYpfaY9VCWZpai3E1iSfNeKnKSXKYeo1CdKGA9KK7HveJ"
-        config.access_token        = "1097694819239964673-UeejF5wc18yX4cZCqnhvlkLxWDGStb"
-        config.access_token_secret = "cbvG5QWkj64ClIcEksh9WzCsddJc3DlSaDLuQkEUSzX9h"
+        config.consumer_key        = TWITTER_DEV_CONSUMER_KEY
+        config.consumer_secret     = TWITTER_DEV_CONSUMER_SECRET
+        config.access_token        = TWITTER_DEV_ACCESS_TOKEN
+        config.access_token_secret = TWITTER_DEV_ACCESS_TOKEN_SECRET
+        # config.consumer_key        = "vYlAgrKfsaF1pEH7U9oK76b1S"
+        # config.consumer_secret     = "bLo0FNYpfaY9VCWZpai3E1iSfNeKnKSXKYeo1CdKGA9KK7HveJ"
+        # config.access_token        = "1097694819239964673-UeejF5wc18yX4cZCqnhvlkLxWDGStb"
+        # config.access_token_secret = "cbvG5QWkj64ClIcEksh9WzCsddJc3DlSaDLuQkEUSzX9h"
       end
     end
 end
