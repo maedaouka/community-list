@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_twitter_client, only: [:create]
 
   # GET /users/mypage or root
   def mypage
@@ -58,6 +59,8 @@ class UsersController < ApplicationController
       @team_user.team = Team.find(user_params["team_id"])
       @team_user.user = current_user
       @team_user.save
+
+      @twitter.add_list_member(@team.twitter_list_uri, invited_user_screen_name)
       
       respond_to do |format|
         format.html { redirect_to @team, notice: '登録' }
@@ -100,5 +103,14 @@ class UsersController < ApplicationController
     def user_params
       # params.require(:user).permit(:uid, :twitter_user_id, :screen_name)
       params.permit(:screen_name, :team_id)
+    end
+
+    def set_twitter_client
+      @twitter = Twitter::REST::Client.new do |config|
+        config.consumer_key        = TWITTER_DEV_CONSUMER_KEY
+        config.consumer_secret     = TWITTER_DEV_CONSUMER_SECRET
+        config.access_token        = TWITTER_DEV_ACCESS_TOKEN
+        config.access_token_secret = TWITTER_DEV_ACCESS_TOKEN_SECRET
+      end
     end
 end
