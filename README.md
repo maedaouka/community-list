@@ -9,7 +9,7 @@ twitter apiを利用して、このウェブアプリ上で作成したリスト
 
 参考リンク
 
-  twitter gem  https://github.com/sferik/twitter
+  twitter gem  https://github.com/sferik/twitter <br>
   firebaseAuth+Rails  https://qiita.com/johnslith/items/6f8742b786b50f8dc0ac
   
 
