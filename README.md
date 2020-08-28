@@ -3,6 +3,8 @@
 twitterのリストをみんなで作成できるサービスです。
 twitter apiを利用して、このウェブアプリ上で作成したリストをtwitter上のリストに自動で反映します。
 
+![ezgif-1-47643f768ba6](https://user-images.githubusercontent.com/29334692/91519562-f0bdeb80-e92d-11ea-88e2-b9be66c88e24.gif)
+
 # 構成
 ![IMG_20200727_135928](https://user-images.githubusercontent.com/29334692/88580428-8b54b180-d086-11ea-817d-375a1d284322.jpg)
 ![IMG_20200727_140059](https://user-images.githubusercontent.com/29334692/88580447-90b1fc00-d086-11ea-9681-cfa59490d323.jpg)
