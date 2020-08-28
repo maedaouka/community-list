@@ -3,6 +3,14 @@
 twitterのリストをみんなで作成できるサービスです。
 twitter apiを利用して、このウェブアプリ上で作成したリストをtwitter上のリストに自動で反映します。
 
+使用技術
+  twitterAPI, firebaseAuth, Rails
+
+参考リンク
+  twitter gem  https://github.com/sferik/twitter
+  firebaseAuth+Rails  https://qiita.com/johnslith/items/6f8742b786b50f8dc0ac
+  
+
 ![ezgif-1-47643f768ba6](https://user-images.githubusercontent.com/29334692/91519562-f0bdeb80-e92d-11ea-88e2-b9be66c88e24.gif)
 
 # 構成
