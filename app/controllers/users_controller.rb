@@ -7,11 +7,11 @@ class UsersController < ApplicationController
     @user = current_user
     if current_user.nil?
       redirect_to login_path
+    else
+      @team_users = TeamUser.where(user_id: current_user.id)
+      @teams = Team.all
+      @team = Team.new
     end
-    @team_users = TeamUser.where(user_id: current_user.id)
-    @teams = Team.all
-    @team = Team.new
-
   end
 
   # GET /users
