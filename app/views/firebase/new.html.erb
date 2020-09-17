@@ -56,7 +56,6 @@
       const uiConfig = {
         callbacks: {
           signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-            console.log(authResult)
             authResult.user.getIdToken(true)
             .then((idToken) => { railsLogin(authResult.additionalUserInfo.isNewUser, idToken, authResult.additionalUserInfo) })
             .catch((error)  => { console.log(`Firebase getIdToken failed!: ${error.message}`) });
