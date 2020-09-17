@@ -81,11 +81,6 @@
     }
       
     const railsLogin = (isNewUser, idToken, userInfo) => {
-      console.log("rails login")
-      console.log(idToken)
-
-      console.log("Twitter　ユーザーinfo")
-      console.log(userInfo.username)
       const url = isNewUser ? "/accounts" : "/login";
       const headers = Object.assign(csrfTokenObj(), authorizationObj(idToken));
       $.ajax({url: url, type: "POST", headers: headers, data: {
