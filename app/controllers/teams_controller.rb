@@ -34,7 +34,6 @@ class TeamsController < ApplicationController
     @team_user.team = @team
     @team_user.user = current_user
 
-    puts(team_params)
 
     # twitterのリストを作成する
     twitter_res = @twitter.create_list(@team.name, option = {description: @team.explanation})
