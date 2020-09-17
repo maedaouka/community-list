@@ -3,9 +3,6 @@ class AccountsController < FirebaseController
   def create
     puts "アカウント　作成1"
     super do |decoded_token|
-      puts decoded_token
-      puts "センテンスパラム "
-      puts account_params
       User.create(
         uid: decoded_token['uid'],
         twitter_user_id: decoded_token['decoded_token'][:payload]['user_id'],
