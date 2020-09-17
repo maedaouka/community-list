@@ -41,8 +41,6 @@ class TeamsController < ApplicationController
     twitter_res = @twitter.create_list(@team.name, option = {description: @team.explanation})
     puts @twitter.add_list_member(twitter_res.uri, current_user.screen_name)
     
-    puts twitter_res.id
-    puts twitter_res.url
 
     @team.twitter_list_id = twitter_res.id
     @team.twitter_list_uri = twitter_res.uri
