@@ -8,6 +8,7 @@ class FirebaseController < ApplicationController
     end
   end
 
+  # firebaseから取得した情報を基にuser情報を保存する。
   def create
     if decoded_token = authenticate_firebase_id_token
       user = yield(decoded_token)
