@@ -1,0 +1,75 @@
+<div class="border-bottom">
+  <div class="row px-3 mx-5 pt-3 pb-4">
+    <h1 class="col-sm-7 px-0">comm-list</h1>
+    <div class="col-sm-5 d-flex align-items-center justify-content-end px-0">
+      <div class="px-0">
+        <img style="width:30px" src=<%= @user.image_url %> class="rounded-circle pb-1">
+        <%= @user.name%>
+        @<%= @user.screen_name%>
+        <%= link_to 'ログアウト',"/", onclick: 'firebaseLogout();return false;', class: 'btn btn-secondary ml-5' %>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="modal fade" id="add-member" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div id="room-name-modal">
+        <%= render 'add_member_form', user: @new_user %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="edit-team" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div id="room-name-modal">
+        <%= render 'edit_team_form', team: @team %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card p-5 mx-auto" style="width:97%">
+<h1 class="mx-5 mt-3"><%= @team.name %></h1>
+<p class="text-secondary mx-5 px-1"><%= @team.explanation %></p>
+
+<div class="row py-3 pr-1 d-flex align-items-center justify-content-end">
+  <button type="button" class="btn btn-outline-info mr-4 px-4 py-2" data-toggle="modal" data-target="#add-member">メンバーの追加</button>
+  <button type="button" class="btn btn-outline-info px-4 py-2" data-toggle="modal" data-target="#edit-team">グループ情報の編集</button>
+</div>
+  <div class="row">
+  
+    <% @team.team_user.each do |team_user| %>
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <div class="m-0 px-0 pt-3 mx-auto" style="width:150px">
+          <img style="width:150px" src=<%= team_user.user.image_url %> class="rounded-circle">
+        </div>
+        <div class="m-0 px-0 pt-1 mx-auto" style="width:150px">
+          <p class="text-center p-0 m-0">@<%= team_user.user.screen_name %></p>
+          <h5 class="text-center"><%= team_user.user.name %></h5>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+<!-- TODO: URL問題が解決したら対応。 -->
+<!-- ユーザータイムラインを表示する -->
+
+<%
+=begin%>
+ <div class="m-0 px-0 pt-3 mx-auto" style="width:90%">
+  <a class="twitter-timeline"
+    href="https://twitter.com/testuxxn/lists/happy6">
+    Tweets from https://twitter.com/testuxxn/lists/happy6
+  </a>
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div> 
+<%
+=end%>

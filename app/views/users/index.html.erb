@@ -1,5 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+<div class="border-bottom">
+  <div class="row px-3 mx-5 pt-3 pb-4">
+    <h1 class="col-md-7 px-0">comm-list</h1>
+    <div class="col-md-5 d-flex align-items-center px-0">
+      <div class="col-md-12 px-0">
+        <%= @account_mailaddress %>
+        <%= link_to 'ログアウト',"/", onclick: 'firebaseLogout();return false;', class: 'btn btn-secondary float-right' %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h1>Users</h1>
 
 <table>
@@ -27,3 +39,41 @@
 <br>
 
 <%= link_to 'New User', new_user_path %>
+
+<script>
+  $(document).on('turbolinks:render', function() {location.reload()});
+
+  // ログアウト処理
+  // TODD: headerにまとめる際に消す。
+  var firebaseConfig = {
+    apiKey: "AIzaSyDfZ0p6ysbml7IByXoXC-2-1BGmRlS-61k",
+    authDomain: "comm-list.firebaseapp.com",
+    databaseURL: "https://comm-list.firebaseio.com",
+    projectId: "comm-list",
+    storageBucket: "comm-list.appspot.com",
+    messagingSenderId: "383913072943",
+    appId: "1:383913072943:web:94089ff7b73cf69c8529da",
+    measurementId: "G-1LYEQJK8LQ"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const csrfTokenObj = () => {
+    return { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content') };
+  }
+
+  const railsLogout = () => {
+    $.ajax({url: "/logout", type: "DELETE", headers: csrfTokenObj()})
+      .done((data) => { 
+        console.log("Rails logout!")
+        })
+      .fail((data) => { console.log("Rails logout failed!") });
+  }
+
+  const firebaseLogout = () => {
+  firebase.auth().signOut()
+    .then(()       => { railsLogout() })
+    .catch((error) => { console.log(`Firebase logout failed!: ${error.message}`) });
+}
+</script>

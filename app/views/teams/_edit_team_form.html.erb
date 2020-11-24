@@ -1,0 +1,34 @@
+<%= form_with(model: team, local: true) do |form| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+        <% team.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field modal-body" style="text-transform:uppercase">
+    <%= form.label "グループID（URLが変わります）" %>
+    <%= form.text_field :uid, class: "form-control", placeholder: "グループIDを入力" %>
+  </div>
+
+  <div class="field modal-body">
+    <%= form.label "グループ名" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "グループ名を入力" %>
+  </div>
+
+  <div class="field modal-body">
+    <%= form.label "説明文" %>
+    <%= form.text_field :explanation, class: "form-control", placeholder: "グループの説明を入力" %>
+  </div>
+
+
+  <div class="actions modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+    <%= form.submit "決定", class: "btn btn-info" %>
+  </div>
+<% end %>
